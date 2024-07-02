@@ -14,6 +14,12 @@
     const newBlog = await blogService.postBlog({title, content})
     blogs = [...blogs, newBlog]
   }
+
+  const deleteBlog = async (blogId) => {
+    const deletedBlog = await blogService.deleteBlog(blogId)
+    blogs = blogs.filter(blog => blog._id !== deletedBlog._id)
+  }
+
 </script>
 
 <h1>Blogs-API</h1>
@@ -32,6 +38,7 @@
     <div>
       <h3>{blog.title}</h3>
       <p>{blog.content}</p>
+      <button on:click={() => deleteBlog(blog._id)}>Delete</button>
     </div>
   </li>
   {/each}

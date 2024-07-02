@@ -12,7 +12,13 @@ const postBlog = async (blog) => {
   return response.data;
 };
 
+const deleteBlog = async (blogId) => {
+  const response = await axios.delete(`${baseUrl}/blogs/${blogId}`);
+  return response.data;
+};
+
 export default {
   getAllBlogs,
   postBlog,
+  deleteBlog,
 };
