@@ -10,8 +10,9 @@
     blogs = await blogService.getAllBlogs()
   })
 
-  const addBlog = () => {
-    console.log(title, content)
+  const addBlog = async () => {
+    const newBlog = await blogService.postBlog({title, content})
+    blogs = [...blogs, newBlog]
   }
 </script>
 
@@ -27,7 +28,12 @@
 <h2>Blogs</h2>
 <ul>
   {#each blogs as blog}
-  <li>{blog.content}</li>
+  <li>
+    <div>
+      <h3>{blog.title}</h3>
+      <p>{blog.content}</p>
+    </div>
+  </li>
   {/each}
 </ul>
 
