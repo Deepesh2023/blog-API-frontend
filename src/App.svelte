@@ -1,6 +1,14 @@
 <script>
+  import { onMount } from "svelte";
+  import blogService from "./services/blogService";
+
   let title = ""
   let content = ""
+  let blogs = []
+
+  onMount( async() => {
+    blogs = await blogService.getAllBlogs()
+  })
 
   const addBlog = () => {
     console.log(title, content)
@@ -17,6 +25,11 @@
 <button type="submit">Add blog</button>
 </form>
 <h2>Blogs</h2>
+<ul>
+  {#each blogs as blog}
+  <li>{blog.content}</li>
+  {/each}
+</ul>
 
 <style>
   input, label, textarea {
