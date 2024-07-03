@@ -1,7 +1,6 @@
 <script>
   import blogService from "./services/blogService";
-
-
+  import {blogsList} from "./stores/blogStore"
   export let dialog
 
   let title = ""
@@ -9,7 +8,8 @@
 
 
   const addBlog = async () => {
-    await blogService.postBlog({title, content})
+    const newBlog = await blogService.postBlog({title, content})
+    blogsList.update((blogs) => [...blogs, newBlog])
     dialog.close()
   }
 
