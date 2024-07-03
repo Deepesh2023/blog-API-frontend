@@ -3,22 +3,16 @@
   import blogService from "./services/blogService";
   import EditBlog from "./EditBlog.svelte";
 
-  let title = ""
-  let content = ""
   let blogs = []
-  let showModal = false
+  let dialog
 
   onMount( async() => {
     blogs = await blogService.getAllBlogs()
   })
 
-  const addBlog = async () => {
-    const newBlog = await blogService.postBlog({title, content})
-    blogs = [...blogs, newBlog]
-  }
 
   const editBlog = () => {
-    showModal = true
+    dialog.showModal()
   }
 
 
@@ -30,16 +24,9 @@
 </script>
 
 <h1>Blogs-API</h1>
-<form on:submit|preventDefault={addBlog}>
-<h2>Create new</h2>
-<label for="">Title: </label>
-<input type="text" name="" id="" bind:value={title}>
-<label for="">Content: </label>
-<textarea name="" id="" bind:value={content}></textarea>
-<button type="submit">Add blog</button>
-</form>
+<button on:click|preventDefault={() => dialog.showModal()}>New blog</button>
 
-<EditBlog showModal={showModal}/>
+<EditBlog bind:dialog/>
 
 <h2>Blogs</h2>
 <ul>
@@ -54,9 +41,3 @@
   </li>
   {/each}
 </ul>
-
-<style>
-  input, label, textarea {
-    display: block;
-  }
-</style>
