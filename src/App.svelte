@@ -24,6 +24,7 @@
   });
 
   const showBlogForm = (blog = null) => {
+    // check whether its a new blog post or editing an existing one
     if (blog) {
       (title = blog.title), (content = blog.content), (blogId = blog._id);
     }
@@ -36,4 +37,4 @@
 <button on:click|preventDefault={showBlogForm}>New blog</button>
 
 <BlogForm bind:dialog {title} {content} {blogId} />
-<Blogs {blogs} editBlog={showBlogForm} />
+<Blogs {blogs} {showBlogForm} />

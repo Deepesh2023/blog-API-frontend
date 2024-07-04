@@ -1,11 +1,10 @@
 <script>
   import blogService from "../services/blogService";
   import { blogsList } from "../stores/blogStore";
-  import Blogs from "./Blogs.svelte";
 
   export let title = "";
   export let content = "";
-  export let blogId;
+  export let blogId = null;
 
   export let dialog;
 

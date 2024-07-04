@@ -3,7 +3,7 @@
   import blogService from "../services/blogService";
 
   export let blogs;
-  export let editBlog;
+  export let showBlogForm;
 
   const deleteBlog = async (blogId) => {
     const deletedBlog = await blogService.deleteBlog(blogId);
@@ -23,7 +23,7 @@
         <button on:click={() => deleteBlog(blog._id)}>Delete</button>
         <button
           on:click={() => {
-            editBlog(blog);
+            showBlogForm(blog);
           }}>Edit</button
         >
       </div>
