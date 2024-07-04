@@ -17,8 +17,14 @@ const deleteBlog = async (blogId) => {
   return response.data;
 };
 
+const updateBlog = async (blogId, updatedBlog) => {
+  const response = await axios.put(`${baseUrl}/blogs/${blogId}`, updatedBlog)
+  return response.data
+}
+
 export default {
   getAllBlogs,
   postBlog,
+  updateBlog,
   deleteBlog,
 };

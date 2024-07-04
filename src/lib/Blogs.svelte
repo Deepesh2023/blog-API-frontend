@@ -3,6 +3,7 @@
   import blogService from "../services/blogService";
 
   export let blogs;
+  export let editBlog;
 
   const deleteBlog = async (blogId) => {
     const deletedBlog = await blogService.deleteBlog(blogId);
@@ -10,8 +11,6 @@
       blogs.filter((blog) => blog._id !== deletedBlog._id)
     );
   };
-
-  const editBlog = () => {};
 </script>
 
 <h2>Blogs</h2>
@@ -22,7 +21,11 @@
         <h3>{blog.title}</h3>
         <p>{blog.content}</p>
         <button on:click={() => deleteBlog(blog._id)}>Delete</button>
-        <button on:click={editBlog}>Edit</button>
+        <button
+          on:click={() => {
+            editBlog(blog);
+          }}>Edit</button
+        >
       </div>
     </li>
   {/each}

@@ -1,10 +1,13 @@
 <script>
   import blogService from "../services/blogService";
   import { blogsList } from "../stores/blogStore";
-  export let dialog;
+  import Blogs from "./Blogs.svelte";
 
-  let title = "";
-  let content = "";
+  export let title = "";
+  export let content = "";
+  export let blogId;
+
+  export let dialog;
 
   const addBlog = async () => {
     const newBlog = await blogService.postBlog({ title, content });
@@ -13,17 +16,32 @@
     content = "";
     dialog.close();
   };
+
+  const editBlog = async () => {
+    const updatedBlog = await blogService.updateBlog(blogId, {
+      title,
+      content,
+    });
+
+    blogsList.update((blogs) =>
+      blogs.map((blog) => (blog._id === updatedBlog._id ? updatedBlog : blog))
+    );
+
+    title = "";
+    content = "";
+    dialog.close();
+  };
 </script>
 
 <dialog bind:this={dialog} on:close>
-  <form on:submit|preventDefault={addBlog}>
+  <form on:submit|preventDefault={blogId ? editBlog : addBlog}>
     <h2>Create new</h2>
 
     <label for="">Title: </label>
     <input type="text" name="" id="" bind:value={title} />
     <label for="">Content: </label>
     <textarea name="" id="" bind:value={content}></textarea>
-    <button type="submit">Add blog</button>
+    <button type="submit">{blogId ? "Edit blog" : "Add blog"}</button>
   </form>
 </dialog>
 
