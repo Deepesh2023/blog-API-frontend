@@ -20,7 +20,7 @@
       <div>
         <h3>{blog.title}</h3>
         <p>{blog.content}</p>
-        <button on:click={() => deleteBlog(blog._id)}>Delete</button>
+        <button on:click={() => deleteBlog(blog.id)}>Delete</button>
         <button
           on:click={() => {
             showBlogForm(blog);
