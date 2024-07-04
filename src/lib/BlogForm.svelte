@@ -23,7 +23,7 @@
     });
 
     blogsList.update((blogs) =>
-      blogs.map((blog) => (blog._id === updatedBlog._id ? updatedBlog : blog))
+      blogs.map((blog) => (blog.id === updatedBlog.id ? updatedBlog : blog))
     );
 
     title = "";

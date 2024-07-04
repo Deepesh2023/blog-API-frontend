@@ -8,7 +8,7 @@
   const deleteBlog = async (blogId) => {
     const deletedBlog = await blogService.deleteBlog(blogId);
     blogsList.update((blogs) =>
-      blogs.filter((blog) => blog._id !== deletedBlog._id)
+      blogs.filter((blog) => blog.id !== deletedBlog.id)
     );
   };
 </script>

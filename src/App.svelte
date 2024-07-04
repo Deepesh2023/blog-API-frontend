@@ -26,7 +26,7 @@
   const showBlogForm = (blog = null) => {
     // check whether its a new blog post or editing an existing one
     if (blog) {
-      (title = blog.title), (content = blog.content), (blogId = blog._id);
+      (title = blog.title), (content = blog.content), (blogId = blog.id);
     }
 
     dialog.showModal();
